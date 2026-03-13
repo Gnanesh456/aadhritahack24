@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Teacher Portal</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-dark bg-dark px-4">
+
+<span class="navbar-brand fw-bold">Notenest</span>
+
+<a href="/upload" class="btn btn-success me-2">Upload</a>
+
+<a href="/logout" class="btn btn-light">Logout</a>
+
+</nav>
+
+<div class="container mt-4">
+
+<h3 class="mb-4">Uploaded Resources</h3>
+
+<div class="row">
+
+{% if resources %}
+
+{% for r in resources %}
+
+<div class="col-md-4">
+
+<div class="card resource-card mb-4">
+
+<div class="card-body">
+
+<h5>{{ r.subject }}</h5>
+
+<p><b>Subject ID:</b> {{ r.subject_id }}</p>
+
+<p><b>Teacher:</b> {{ r.teacher_name }}</p>
+
+<p><b>Unit:</b> {{ r.unit }}</p>
+
+<span class="badge bg-info">{{ r.category }}</span>
+
+<span class="badge bg-success">Verified</span>
+
+<br><br>
+
+<a href="/preview/{{ r.file }}" class="btn btn-primary btn-sm">
+Preview
+</a>
+
+<a href="/download/{{ r.file }}" class="btn btn-secondary btn-sm">
+Download
+</a>
+
+{% if r.youtube %}
+
+<br><br>
+
+<a href="{{ r.youtube }}" target="_blank">
+Watch Lesson
+</a>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="col-12 text-center">
+
+<p class="text-muted">No resources uploaded yet.</p>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</body>
+
+</html>
